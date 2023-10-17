@@ -4,8 +4,9 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
+  width: 100%;
   font-weight: normal;
+  text-align: center;
 }
 
 a,
@@ -32,4 +33,29 @@ a,
     grid-template-columns: 1fr;
     padding: 0 2rem;
   }
+}
+
+.title {
+  font-size: 55px;
+}
+
+.timer__list {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.timer__item {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  font-size: 25px;
+  margin: 0 15px;
+}
+
+.timer__data {
+  font-size: 60px;
+  font-weight: bold;
 }

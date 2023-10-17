@@ -1,21 +1,25 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { reactive, defineAsyncComponent } from 'vue';
+const TransitionElement = defineAsyncComponent(() => import('@/TransitionElement.vue'));
 
 let countDownDate = new Date('Dec 31, 2023 23:59:59').getTime();
-let days = ref();
-let hours = ref();
-let min = ref();
-let sec = ref();
+
+let timerData = reactive({
+  days: 100,
+  hours: 60,
+  min: 60,
+  sec: 60
+});
 
 let countForSecond = setInterval(function () {
   let now = new Date().getTime();
 
   let distance = countDownDate - now;
 
-  days.value = Math.floor(distance / (1000 * 60 * 60 * 24));
-  hours.value = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  min.value = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  sec.value = Math.floor((distance % (1000 * 60)) / 1000);
+  timerData.days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  timerData.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  timerData.min = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  timerData.sec = Math.floor((distance % (1000 * 60)) / 1000);
 
   if (distance < 0) {
     clearInterval(countForSecond);
@@ -24,23 +28,25 @@ let countForSecond = setInterval(function () {
 </script>
 <template>
   <div>
-    time
-
-    <ul>
-      <li>
-        <span id="days">{{ days }}</span> days
+    <ul class="timer__list">
+      <li class="timer__item">
+        <span id="days" class="timer__data">{{ timerData.days }}</span> days
       </li>
 
-      <li>
-        <span id="hours"> {{ hours }} </span> hours
+      <li class="timer__item">
+        <span id="hours" class="timer__data"> {{ timerData.hours }} </span> hours
       </li>
 
-      <li>
-        <span id="min">{{ min }}</span> minutes
+      <li class="timer__item">
+        <span id="min" class="timer__data">{{ timerData.min }}</span> minutes
       </li>
 
-      <li>
-        <span id="sec">{{ sec }}</span> seconds
+      <li class="timer__item">
+        <span id="sec" class="timer__data">{{ timerData.sec }}</span> seconds
+
+        <TransitionElement>
+          <span id="sec" class="timer__data">{{ timerData.sec }}</span> seconds
+        </TransitionElement>
       </li>
     </ul>
   </div>

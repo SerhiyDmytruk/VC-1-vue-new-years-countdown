@@ -4,9 +4,9 @@ defineProps({
     type: String,
     requried: false
   }
-})
+});
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
+  <h1 class="title">{{ title }}</h1>
 </template>
