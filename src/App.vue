@@ -1,31 +1,30 @@
 <script setup>
+import { ref, computed, onUnmounted } from 'vue';
 
-import CountdownHeader from "@/components/CountdownHeader.vue";
-import CountdownSegment from "@/components/CountdownSegment.vue";
-
-import { ref, onUnmounted, computed } from 'vue';
-
-const now = ref(new Date())
-const interval = setInterval(() => (now.value = new Date()), 1000)
-onUnmounted(() => clearInterval(interval));
+import CountdownHeader from '@/components/CountdownHeader.vue';
+import CountdownSegment from '@/components/CountdownSegment.vue';
 
 const newYear = new Date(`01/01/${new Date().getFullYear() + 1} 00:00:00`);
-const days = computed(() => {
-  const one_day =  1000 * 60 * 60 * 24;
-  return (newYear.getTime() - now.value.getTime()) / one_day;
-})
+const now = ref(new Date());
 
+const interval = setInterval(() => (now.value = new Date()), 1000);
+onUnmounted(() => clearInterval(interval));
+
+const days = computed(() => {
+  const one_day = 1000 * 60 * 60 * 24;
+  return (newYear.getTime() - now.value.getTime()) / one_day;
+});
 
 const daysRounded = computed(() => Math.floor(days.value));
 
-const hours = computed(() => 24 * (days.value - daysRounded.value ));
+const hours = computed(() => 24 * (days.value - daysRounded.value));
 const hoursRounded = computed(() => Math.floor(hours.value));
 
-const mins = computed(() => 60*(hours.value - hoursRounded.value));
-const minsRounded = computed(() => Math.floor(mins.value));
+const mins = computed(() => 60 * (hours.value - hoursRounded.value));
+const minsRounded = computed(() => Math.floor(60 * (hours.value - hoursRounded.value)));
 
-const secs = computed(()=> 60*(mins.value - minsRounded.value))
-const secsRounded = computed(()=> Math.floor(secs.value))
+const secs = computed(() => 60 * (mins.value - minsRounded.value));
+const secsRounded = computed(() => Math.floor(secs.value));
 
 </script>
 <template>
