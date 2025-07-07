@@ -1,21 +1,16 @@
 <script setup>
 defineProps({
   label: String,
-  number: Number
 });
 </script>
 <template>
   <div class="segment">
     <div class="number-wrapper">
-      <transition>
-        <span :key="number" class="number">{{ number }}</span>
-      </transition>
+      <span class="number">0</span>
     </div>
-
     <span class="block pt-2 label">{{ label }}</span>
   </div>
 </template>
-
 <style scoped>
 .segment {
   @apply text-center w-[80px];
@@ -47,6 +42,6 @@ defineProps({
 }
 .v-enter-from,
 .v-leave-to {
-  opacity: 0;
+  /* opacity: 0; */
 }
 </style>
