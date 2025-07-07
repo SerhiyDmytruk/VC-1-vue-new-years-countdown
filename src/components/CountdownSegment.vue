@@ -1,12 +1,15 @@
 <script setup>
 defineProps({
   label: String,
+  number: Number
 });
 </script>
 <template>
   <div class="segment">
     <div class="number-wrapper">
-      <span class="number">0</span>
+      <Transition>
+      <span class="number" :key="number" >{{ number }}</span>
+      </Transition>
     </div>
     <span class="block pt-2 label">{{ label }}</span>
   </div>
@@ -42,6 +45,6 @@ defineProps({
 }
 .v-enter-from,
 .v-leave-to {
-  /* opacity: 0; */
+  opacity: 0;
 }
 </style>
